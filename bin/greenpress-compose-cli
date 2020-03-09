@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+readonly scriptpath="$(realpath $0)"
+readonly basepath="$(dirname "$scriptpath")"
+readonly parentpath="$(dirname "${basepath}")"
+readonly timestamp=$(date +"%Y%m%d%H%M%S")
+
+source "${basepath}/helpers"
+
+
+
+# Library from: https://github.com/nk412/optparse
+source "${basepath}/optparse.bash"
+
+# Define command line options
+optparse.define short=d long=down desc="Down composition" variable=down value=true default=false
+optparse.define short=s long=stop desc="Stop composition" variable=stop value=true default=false
+optparse.define short=r long=stop desc="Restart composition" variable=restart value=true default=false
+optparse.define short=l long=list desc="List services from compostion" variable=list value=true default=false
+optparse.define short=x long=exclude desc="Exclude service(s) from compostion" variable=excludes default=""
+optparse.define short=e long=envars desc="Overwrite or add new environment variable(s)" variable=envars default=""
+
+source $( optparse.build )
+
+check docker
+check docker-compose
+
+if [ ${list} == "true" ]; then
+    echo "Services of greenpress composition that can be exluded:"
+    echo "$(parse_yaml ../docker-compose.yaml)" | grep services | awk -F '_' '{print "- "$2}'
+    echo "To exlude service run ${0} -x {service_name}"
+    echo "To exlude multiple services run ${0} -x \"{service_name} {service_name}\""
+fi
+
+if [ ! -z "${excludes}" ]; then
+    echo "Starting composition, next services will be excluded:"
+    excludedServices=(${excludes})
+    for service in ${excludedServices[@]}; do
+        services+=("--scale ${service}=0")
+        echo "- ${service}"
+    done
+fi
+
+cd ${basepath}
+if [ ${restart} == "true" ]; then
+    docker-compose restart
+elif [ ${stop} == "true" ]; then
+    docker-compose stop
+elif [ ${down} == "true" ]; then
+    docker-compose down
+else
+    docker-compose up -d ${services[@]}
+fi
+
+docker-compose logs --no-color -f -t > ${parentpath}/logs/greenpress_${timestamp}.log &
