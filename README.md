@@ -33,11 +33,3 @@ For Windows
 ```
 .\init-data.ps1
 ```
-## Future development
-- initial data insert to databases (admin user + main menu + demo category + demo post)
-- admin panel
-- comments
-- choose and replace themes via panel
-- dockerizing all services
-- nginx
-- support social login via auth-service
