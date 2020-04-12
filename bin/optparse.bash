@@ -109,7 +109,7 @@ usage: \$0 [OPTIONS]
 OPTIONS:
         $optparse_usage
 
-        -? --help  :  usage
+        -h --help  :  usage
 
 XXX
 }
@@ -122,7 +122,7 @@ while [ \$# -ne 0 ]; do
 
         case "\$param" in
                 $optparse_contractions
-                "-?"|--help)
+                "-h"|--help)
                         usage
                         exit 0;;
                 *)
