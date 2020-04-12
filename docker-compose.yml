@@ -1,0 +1,69 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    networks:
+      common_network:
+  admin:
+    image: greenpress/admin:master
+    networks:
+      common_network:
+  assets:
+    image: greenpress/assets:master
+    environment:
+      MONGO_URI: mongodb://mongo/assets-service
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    networks:
+      common_network:
+  auth:
+    image: greenpress/auth:master
+    environment:
+      MONGO_URI: mongodb://mongo/auth-service
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    networks:
+      common_network:
+  blog-front:
+    image: greenpress/blog-front:master
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+      - content
+      - auth
+      - assets
+      - admin
+    environment:
+      CONTENT_SERVICE_URL: content
+      AUTH_SERVICE_URL: auth
+      ASSETS_SERVICE_URL: assets
+      ADMIN_PANEL_URL: admin
+    networks:
+      common_network:
+  content:
+    image: greenpress/content:master
+    environment:
+      MONGO_URI: mongodb://mongo/content-service
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    networks:
+      common_network:
+  secrets:
+    image: greenpress/secrets:master
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: mongodb://mongo/sercets-service
+    links:
+      - mongo
+    networks:
+      common_network:
+networks:
+  common_network:
