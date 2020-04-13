@@ -1,5 +1,2 @@
-<<<<<<< HEAD
-logs/**
-=======
+logs/*.log
 .idea
->>>>>>> origin/master

@@ -26,7 +26,7 @@ source $( optparse.build )
 check docker
 check docker-compose
 
-if [ ${list} == "true" ]; then
+if [ "${list}" == "true" ]; then
     echo "Services of greenpress composition that can be exluded:"
     echo "$(parse_yaml ${composition})" | grep services | awk -F '_' '{print "- "$2}' | sort -u
     echo "To exlude service run ${script} -x {service_name}"
@@ -44,13 +44,13 @@ if [ ! -z "${excludes}" ]; then
 fi
 
 cd ${basepath}
-if [ ${restart} == "true" ]; then
+if [ "${restart}" == "true" ]; then
     docker-compose restart
-elif [ ${stop} == "true" ]; then
+elif [ "${stop}" == "true" ]; then
     docker-compose stop
-elif [ ${down} == "true" ]; then
+elif [ "${down}" == "true" ]; then
     docker-compose down
-elif [ ${up} == "true" ]; then
+elif [ "${up}" == "true" ]; then
     docker-compose up -d ${services[@]}
 else
     ${script} -h
