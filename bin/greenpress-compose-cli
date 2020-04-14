@@ -19,7 +19,7 @@ optparse.define short=s long=stop desc="Stop composition" variable=stop value=tr
 optparse.define short=r long=restart desc="Restart composition" variable=restart value=true default=false
 optparse.define short=l long=list desc="List services from compostion" variable=list value=true default=false
 optparse.define short=x long=exclude desc="Exclude service(s) from compostion" variable=excludes default=""
-optparse.define short=e long=envars desc="Overwrite or add new environment variable(s)" variable=envars default=""
+#optparse.define short=e long=envars desc="Overwrite or add new environment variable(s)" variable=envars default=""
 
 source $( optparse.build )
 

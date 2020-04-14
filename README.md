@@ -34,7 +34,11 @@ For Windows
 .\init-data.ps1
 ```
 
-## greenpress-compose-cli
+## greenpress-compose-cli (WIP)
+greenpress-compose-cli is a command line tool that allous to run the composition with specific parameters.
+For example, to list all the composition services and exlcude one or a few ones from composition.
+It's planned to implement the ability to overwrite environment variables, ports exposions, specify version (tag) of each service in composition.
+
 ### Linux | macOS:
 #### Prerequisites for macOS:
 - gnu-sed
