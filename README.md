@@ -35,7 +35,21 @@ For Windows
 ```
 
 ## greenpress-compose-cli
-#### For Linux:
+### Linux | macOS:
+#### Prerequisites for macOS:
+- gnu-sed
+```
+brew install gnu-sed
+```
+Add to ~/.zshrc or ~/.bashrc or ~/.bash_profile:
+```
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+```
+- coreutils
+```
+brew install coreutils
+```
+
 Quick start:
 ```bash
 ./install.sh
