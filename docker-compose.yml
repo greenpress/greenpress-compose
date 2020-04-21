@@ -5,7 +5,7 @@ services:
     networks:
       common_network:
   admin:
-    image: greenpress/admin:master
+    image: greenpress/admin-panel:master
     networks:
       common_network:
   assets:
