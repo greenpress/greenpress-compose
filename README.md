@@ -56,6 +56,6 @@ brew install coreutils
 
 Quick start:
 ```bash
-./install.sh
+./install-cli.sh
 greenpress-compose-cli --help
 ```

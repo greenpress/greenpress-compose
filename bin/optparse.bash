@@ -159,11 +159,8 @@ rm $build_file
 
 EOF
 
-        local -A o=( ['#NL']='\n' ['#TB']='\t' )
-
-        for i in "${!o[@]}"; do
-                sed -i "s/${i}/${o[$i]}/g" $build_file
-        done
+        perl -i -p -e 's/#NL/\n/g' $build_file
+        perl -i -p -e 's/#TB/\t/g' $build_file
 
         # Unset global variables
         unset optparse_usage
