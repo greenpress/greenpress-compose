@@ -22,7 +22,7 @@ $ docker-compose up
 
 ## Initiate basic information
 This command will inject basic data in database, such as posts, menus, and admin user.
-Run after lanuch.
+Run after launch.
 
 For Linux
 
@@ -35,7 +35,7 @@ For Windows
 ```
 
 ## greenpress-compose-cli (WIP)
-greenpress-compose-cli is a command line tool that allous to run the composition with specific parameters.
+greenpress-compose-cli is a command line tool that allows to run the composition with specific parameters.
 For example, to list all the composition services and exlcude one or a few ones from composition.
 It's planned to implement the ability to overwrite environment variables, ports exposions, specify version (tag) of each service in composition.
 
